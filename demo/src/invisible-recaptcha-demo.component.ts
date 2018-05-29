@@ -1,4 +1,14 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterContentInit,
+  AfterViewInit,
+  OnInit
+} from '@angular/core';
+import { Router } from '@angular/router';
 
 import { InvisibleReCaptchaComponent } from '../../src';
 
@@ -8,7 +18,7 @@ declare var hljs: any;
   selector: 'ngx-invisible-recaptcha-demo',
   templateUrl: './invisible-recaptcha-demo.component.html',
 })
-export class InvisibleReCaptchaDemoComponent implements AfterViewInit {
+export class InvisibleReCaptchaDemoComponent implements AfterViewInit, OnInit {
 
   public readonly exampleCode = `<ngx-invisible-recaptcha #captchaElem
   [type]="type"
@@ -30,7 +40,11 @@ export class InvisibleReCaptchaDemoComponent implements AfterViewInit {
   @ViewChild('langInput') langInput: ElementRef;
 
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.router.navigate(['/recaptcha2']);
   }
 
   ngAfterViewInit(): void {
